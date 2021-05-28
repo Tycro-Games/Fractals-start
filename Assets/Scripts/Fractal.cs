@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Fractal : MonoBehaviour
@@ -23,6 +24,9 @@ public class Fractal : MonoBehaviour
 
     private FractalPart[][] parts;
     public float rotspeed;
+    public float timeGenerationLayers;
+    public float timeIndividual;
+    private bool isDone = false;
 
     private struct FractalPart
     {
@@ -43,6 +47,11 @@ public class Fractal : MonoBehaviour
 
     private void Awake()
     {
+        StartCoroutine(Generating());
+    }
+
+    private IEnumerator Generating()
+    {
         parts = new FractalPart[depth][];
 
         for (int i = 0, length = 1; i < parts.Length; i++, length *= 5)
@@ -51,10 +60,12 @@ public class Fractal : MonoBehaviour
         }
         float scale = 1f;//base scale
         parts[0][0] = CreatePart(0, 0, scale);//first one
+
         for (int l1 = 1; l1 < parts.Length; l1++)//generates in all 5 directions
         {
             scale *= 0.5f;
             FractalPart[] levelParts = parts[l1];
+
             for (int j = 0; j < levelParts.Length; j += 5)
             {
                 for (int c = 0; c < 5; c++)
@@ -63,33 +74,41 @@ public class Fractal : MonoBehaviour
                 }
             }
         }
+        yield return null;
+        StartCoroutine(UpdatePos());
     }
 
-    private void Update()
+    private IEnumerator UpdatePos()
     {
-        Quaternion deltaRotation = Quaternion.Euler(0f, rotspeed * Time.deltaTime, 0f);
-        FractalPart rootPart = parts[0][0];
-        rootPart.rotation *= deltaRotation;
-        rootPart.transform.localRotation = rootPart.rotation;
-        parts[0][0] = rootPart;
-
-        for (int l1 = 1; l1 < parts.Length; l1++)
+        while (true)
         {
-            FractalPart[] parentParts = parts[l1 - 1];
-            FractalPart[] levelParts = parts[l1];
-            for (int j = 0; j < levelParts.Length; j++)
+            Quaternion deltaRotation = Quaternion.Euler(0f, rotspeed * Time.deltaTime, 0f);
+            FractalPart rootPart = parts[0][0];
+            rootPart.rotation *= deltaRotation;
+            rootPart.transform.localRotation = rootPart.rotation;
+            parts[0][0] = rootPart;
+
+            for (int l1 = 1; l1 < parts.Length; l1++)
             {
-                Transform parentTransform = parentParts[j / 5].transform;
-                FractalPart part = levelParts[j];
-                part.rotation *= deltaRotation;
-                //pos rot
-                part.transform.localRotation = parentTransform.localRotation * part.rotation;//so it is local
-                part.transform.localPosition =
-                    parentTransform.localPosition +
-                    parentTransform.localRotation *
-                       (offset * part.transform.localScale.x * part.direction);
-                levelParts[j] = part;
+                FractalPart[] parentParts = parts[l1 - 1];
+                FractalPart[] levelParts = parts[l1];
+                yield return new WaitForSeconds(timeGenerationLayers);
+                for (int j = 0; j < levelParts.Length; j++)
+                {
+                    yield return new WaitForSeconds(timeIndividual);
+                    Transform parentTransform = parentParts[j / 5].transform;
+                    FractalPart part = levelParts[j];
+                    part.rotation *= deltaRotation;
+                    //pos rot
+                    part.transform.localRotation = parentTransform.localRotation * part.rotation;//so it is local
+                    part.transform.localPosition =
+                        parentTransform.localPosition +
+                        parentTransform.localRotation *
+                           (offset * part.transform.localScale.x * part.direction);
+                    levelParts[j] = part;
+                }
             }
+            yield return null;
         }
     }
 
