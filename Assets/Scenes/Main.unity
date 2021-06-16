@@ -565,43 +565,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
       propertyPath: depth
-      value: 5
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
+      propertyPath: offset
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
       propertyPath: Color1.b
-      value: 1.4980392
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
       propertyPath: Color1.g
-      value: 1.0046244
+      value: 0.8101834
       objectReference: {fileID: 0}
     - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
       propertyPath: Color1.r
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
-      propertyPath: Color2.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
-      propertyPath: Color2.g
       value: 1.4980392
       objectReference: {fileID: 0}
     - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
-      propertyPath: Color2.r
-      value: 0.23214783
+      propertyPath: Color2.b
+      value: 1.4980392
       objectReference: {fileID: 0}
     - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
-      propertyPath: rotspeed
+      propertyPath: Color2.g
+      value: 0.22421029
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
+      propertyPath: Color2.r
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
-      propertyPath: timeIndividual
-      value: 0.25
+      propertyPath: rotspeed
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
+      propertyPath: timeIndividual
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
+      propertyPath: mesh.Array.data[0]
+      value: 
+      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 5091636953272637063, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
       propertyPath: timeGenerationLayers
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5361615641128426880, guid: f698792303f3eb84ba719d4fea6e994d, type: 3}
       propertyPath: m_Name
